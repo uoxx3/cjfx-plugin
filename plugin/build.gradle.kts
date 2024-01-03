@@ -13,11 +13,11 @@ plugins {
 	id("com.gradle.plugin-publish") version "1.2.1"
 }
 
-val pluginName: String get() = "cjfx"
-val pluginId: String get() = "uoxx3.$pluginName"
-
 group = "io.github.uoxx3"
 version = "1.0.0"
+
+val pluginName: String get() = "cjfx"
+val pluginId: String get() = "$group.$pluginName"
 
 /* -----------------------------------------------------
  * Java configuration
@@ -38,7 +38,7 @@ gradlePlugin {
 	
 	// Plugin definition
 	val cjfx by plugins.creating {
-		description = "Create projects with JavaFX with different configurations from the same platform"
+		description = "Gradle plugin used for creating JavaFX projects in a simple and fully configurable way."
 		displayName = "Custom JavaFx Plugin"
 		id = pluginId
 		implementationClass = "uoxx3.cjfx.CjfxPluginEntry"
@@ -51,11 +51,17 @@ afterEvaluate {
 	publishing {
 		publications {
 			withType(MavenPublication::class.java) {
-				val artifactName = "plugin"
-				if (artifactId.endsWith(artifactName)) {
-					val part = artifactId.substring(0, (artifactId.length - artifactName.length))
-					artifactId = if (part.isBlank()) pluginName else "$part.$pluginName"
-				}
+				// Check if the artifact name contains the "plugin" word
+				if (!artifactId.endsWith("plugin") || artifactId.contains("gradle")) return@withType
+				
+				// Clean the artifact name
+				val wordLen = "plugin".length
+				val baseArtifact = artifactId.substring(0 until (artifactId.length - wordLen))
+				
+				// Check if the artifact name ends with dot "." character
+				val artifactName = baseArtifact.dropLastWhile { it == '.' }
+				
+				artifactId = if (artifactName.isBlank()) pluginName else "$artifactName.$pluginName"
 			}
 		}
 	}
@@ -95,8 +101,10 @@ tasks.named<Test>("test") {
  * ----------------------------------------------------- */
 
 dependencies {
-	implementation("com.google.code.gson:gson:2.10.1")
+	implementation("org.javamodularity:moduleplugin:1.8.12")
 	implementation("com.github.ushiosan23:jvm-utilities:1.0.0")
+	implementation("org.openjfx:javafx-base:21:win")
+	implementation("com.google.code.gson:gson:2.10.1")
 	compileOnly("org.jetbrains:annotations:24.1.0")
 	// Use JUnit Jupiter for testing.
 	testImplementation(libs.junit.jupiter)
