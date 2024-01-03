@@ -10,6 +10,7 @@ rootProject.name = "cjfx-plugin"
 
 pluginManagement {
 	repositories {
+		mavenLocal() // Only for testing purposes
 		mavenCentral()
 		google()
 		maven {
@@ -21,6 +22,7 @@ pluginManagement {
 dependencyResolutionManagement {
 	repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
 	repositories {
+		mavenLocal() // Only for testing purposes
 		mavenCentral()
 		google()
 		maven {
@@ -29,4 +31,4 @@ dependencyResolutionManagement {
 	}
 }
 
-include("plugin")
+include(":plugin", ":example")
