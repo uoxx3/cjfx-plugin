@@ -3,6 +3,10 @@
 This plugin is used to manage and configure a JavaFX project quickly and reliably. In addition to supporting cross-platform
 compilation from the current platform.
 
+## Current version
+
+`cjfx-version = 1.1.0`
+
 ## How to use
 
 It is currently only available for the Gradle build system. In order to use it, you must define the plugin within the project as
@@ -12,7 +16,7 @@ __Groovy DSL__
 
 ```groovy
 plugins {
-  id "io.github.uoxx3.cjfx" version "1.0.0"
+  id "io.github.uoxx3.cjfx" version "{cjfx-version}"
 }
 ```
 
@@ -20,7 +24,7 @@ __Kotlin DSL__
 
 ```kotlin
 plugins {
-  id("io.github.uoxx3.cjfx") version "1.0.0"
+  id("io.github.uoxx3.cjfx") version "{cjfx-version}"
 }
 ```
 
@@ -163,7 +167,7 @@ Cjfx {
 
 ### Configuration using Gradle configuration
 
-It can also be configured through the `gradle.properties` files as follows:
+It can also be configured through the `gradle.properties` or `cjfx.properties` files as follows:
 
 ```properties
 cjfx.configuration.version=#latest#
