@@ -14,7 +14,7 @@ plugins {
 }
 
 group = "io.github.uoxx3"
-version = "1.0.0"
+version = "1.1.0"
 
 val pluginName: String get() = "cjfx"
 val pluginId: String get() = "$group.$pluginName"
