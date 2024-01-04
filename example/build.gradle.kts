@@ -2,7 +2,7 @@ import uoxx3.cjfx.CjfxModule
 
 plugins {
 	application
-	id("io.github.uoxx3.cjfx") version "1.0.0"
+	id("io.github.uoxx3.cjfx") version "1.1.0"
 }
 
 application {
